@@ -14,7 +14,7 @@ int playerEnergy = 50;
 const int maxHealth_E = 100;
 int enemyHealth = 100;
 
-const int maxHealth_E = 100;
+const int maxEnergy_E = 100;
 int enemyEnergy = 50;
 
 bool matchActive;
@@ -22,28 +22,50 @@ bool matchActive;
 
 
 
-enum Moves
-{
-	Atk = 1, sp_Atk, Dodge, Recharge, Heal 
-};
+
 
 
 void PlayerTurn() 
 {
 	std::cout << "*****Player***** " << std::endl << "Health - " << playerHealth << std::endl << "Energy - " << playerEnergy << std::endl;
 	std::cout << "*****Enemy***** " << std::endl << "Health - " << enemyHealth << std::endl << "Energy - " << enemyEnergy << std::endl;
-}
 
-void EnemyTurn()
-{
-	int choice = EnemyChoice();
+	std::string chooses;
+	
+	int Choice;
+	std::cin>> Choice;
+
+	switch(Choice)
+	{
+	case 1: 
+		std::cout << "it works \n";
+		break;
+	
+	case 2:
+		std::cout << "it again \n";
+		PlayerTurn();
+		break;
+
+	case 3:
+		std::cout << "no \n";
+		PlayerTurn();
+		break;
+	}
 }
 
 int EnemyChoice()    //most basic version : decisionmaking AI
 {
-	int choice = rand() % 5;
-	return choice;
+	int firstChoice = rand() % 5;
+	return 0;
 }
+void EnemyTurn()
+{
+	int choice = 0;
+	choice= EnemyChoice();
+	
+
+}
+
 
 void calcAttack()
 {
@@ -75,7 +97,7 @@ void Gameplayer()
 }
 int main() 
 {
-	while(matchActive)
+	/*while(matchActive)
 	{
 		Gameplayer();
 		if(playerEnergy > enemyHealth)
@@ -91,5 +113,7 @@ int main()
 			// Draw
 		}
 	}
+*/
 
+	PlayerTurn();
 }
