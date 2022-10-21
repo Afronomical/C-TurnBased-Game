@@ -1,25 +1,16 @@
 #include <iostream>
 #include <string>
+#include "Warrior.h"
 
 
-//Player
-const int maxHealth_P = 100;
-int playerHealth = 100;
 
-const int maxEnergy_P = 50;
-int playerEnergy = 50;
+
+//Create Player
+Warrior Player;
 
 
 //Enemy
-const int maxHealth_E = 100;
-int enemyHealth = 100;
-
-const int maxEnergy_E = 100;
-int enemyEnergy = 50;
-
-bool matchActive;
-
-
+Warrior Enemy;
 
 
 
@@ -27,8 +18,8 @@ bool matchActive;
 
 void PlayerTurn() 
 {
-	std::cout << "*****Player***** " << std::endl << "Health - " << playerHealth << std::endl << "Energy - " << playerEnergy << std::endl;
-	std::cout << "*****Enemy***** " << std::endl << "Health - " << enemyHealth << std::endl << "Energy - " << enemyEnergy << std::endl;
+	std::cout << "*****Player***** " << std::endl << "Health - " << Player.getHealth() << std::endl << "Energy - " << Player.getEnergy() << std::endl;
+	std::cout << "*****Enemy***** " << std::endl << "Health - " << Enemy.getHealth() << std::endl << "Energy - " << Enemy.getEnergy() << std::endl;
 
 	std::string chooses;
 	
@@ -38,7 +29,14 @@ void PlayerTurn()
 	switch(Choice)
 	{
 	case 1: 
-		std::cout << "it works \n";
+		std::cout << "Damage \n";
+
+		int dmg;
+
+		std::cin >> dmg;
+		Player.takeDamage(dmg);
+		PlayerTurn();
+
 		break;
 	
 	case 2:
@@ -47,7 +45,10 @@ void PlayerTurn()
 		break;
 
 	case 3:
-		std::cout << "no \n";
+		std::cout << "Heal \n";
+
+		std::cin >> dmg;
+		Player.healDamage(dmg);
 		PlayerTurn();
 		break;
 	}
@@ -75,11 +76,11 @@ void calcAttack()
 void WinCheck()
 {
 	
-	if(playerHealth == 0|| enemyHealth == 0)
+	if(Player.getHealth() == 0 || Enemy.getHealth() == 0)
 	{
 		return;
 	}
-	else if (playerHealth > 0 && enemyHealth > 0)
+	else if (Player.getHealth() > 0 && Enemy.getHealth() > 0)
 	{
 		PlayerTurn();
 	}
@@ -97,6 +98,10 @@ void Gameplayer()
 }
 int main() 
 {
+
+	
+
+	
 	/*while(matchActive)
 	{
 		Gameplayer();
