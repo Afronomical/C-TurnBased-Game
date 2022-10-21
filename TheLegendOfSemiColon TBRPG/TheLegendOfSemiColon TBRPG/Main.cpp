@@ -2,8 +2,8 @@
 #include <string>
 #include "Warrior.h"
 
-
-
+void PlayerTurn();
+bool WinCheck();
 
 //Create Player
 Warrior Player;
@@ -14,7 +14,26 @@ Warrior Enemy;
 
 
 
+bool WinCheck()
+{
+	
+	if(Player.getHealth() == 0 || Enemy.getHealth() == 0)
+	{
+		return false;
+	}
+	else if (Player.getHealth() > 0 && Enemy.getHealth() > 0)
+	{
+		PlayerTurn();
+	}
+}
 
+void EnemyTurn()
+{
+	int choice = 0;
+	//choice= EnemyChoice();
+	
+	WinCheck();
+}
 
 void PlayerTurn() 
 {
@@ -28,30 +47,32 @@ void PlayerTurn()
 
 	switch(Choice)
 	{
-	case 1: 
-		std::cout << "Damage \n";
+		case 1: 
+			std::cout << "Damage \n";
 
-		int dmg;
+			int dmg;
 
-		std::cin >> dmg;
-		Player.takeDamage(dmg);
-		PlayerTurn();
+			std::cin >> dmg;
+			Player.takeDamage(dmg);
+			PlayerTurn();
 
-		break;
+			break;
 	
-	case 2:
-		std::cout << "it again \n";
-		PlayerTurn();
-		break;
+		case 2:
+			std::cout << "it again \n";
+			PlayerTurn();
+			break;
 
-	case 3:
-		std::cout << "Heal \n";
+		case 3:
+			std::cout << "Heal \n";
 
-		std::cin >> dmg;
-		Player.healDamage(dmg);
-		PlayerTurn();
-		break;
+			std::cin >> dmg;
+			Player.healDamage(dmg);
+			PlayerTurn();
+			break;
 	}
+
+	EnemyTurn();
 }
 
 int EnemyChoice()    //most basic version : decisionmaking AI
@@ -59,42 +80,19 @@ int EnemyChoice()    //most basic version : decisionmaking AI
 	int firstChoice = rand() % 5;
 	return 0;
 }
-void EnemyTurn()
-{
-	int choice = 0;
-	choice= EnemyChoice();
-	
-
-}
 
 
-void calcAttack()
+void Attack()
 {
 
 }
-
-void WinCheck()
-{
-	
-	if(Player.getHealth() == 0 || Enemy.getHealth() == 0)
-	{
-		return;
-	}
-	else if (Player.getHealth() > 0 && Enemy.getHealth() > 0)
-	{
-		PlayerTurn();
-	}
-}
-
-
-
 
 
 void Gameplayer()
 {
 	PlayerTurn();
 	EnemyTurn();
-	WinCheck();
+	
 }
 int main() 
 {
@@ -121,4 +119,5 @@ int main()
 */
 
 	PlayerTurn();
+	WinCheck();
 }
