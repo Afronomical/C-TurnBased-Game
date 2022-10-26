@@ -1,13 +1,26 @@
 #include <iostream>
 #include "Game.h"
-#include "Warrior.h"
+
 
 Game::Game() : gameOver{false} {}
 
+
+void Game::PlayGame() {
+	
+	while(Player.getHealth() > 0 && Enemy.getHealth() > 0) {
+
+		PlayerTurn();
+		EnemyTurn();
+		Resolve();
+
+	}
+
+}
+
 void Game::PlayerTurn()
 {
-	std::cout << "*****Player***** " << std::endl << "Health - " << /*Player.getHealth()*/"" << std::endl << "Energy - " << /*Player.getEnergy()*/"" << std::endl;
-	std::cout << "*****Enemy***** " << std::endl << "Health - " << /*Enemy.getHealth()*/"" << std::endl << "Energy - " << /*Enemy.getEnergy()*/"" << std::endl;
+	std::cout << "*****Player***** " << std::endl << "Health - " << Player.getHealth() << std::endl << "Energy - " << Player.getEnergy() << std::endl;
+	std::cout << "*****Enemy***** " << std::endl << "Health - " << Enemy.getHealth() << std::endl << "Energy - " << Enemy.getEnergy() << std::endl;
 
 	std::string chooses;
 
@@ -36,4 +49,16 @@ void Game::PlayerTurn()
 	}
 
 	
+}
+
+
+void Game::EnemyAI() {
+
+}
+
+void Game::EnemyTurn() {
+}
+
+void Game::Resolve() {
+
 }

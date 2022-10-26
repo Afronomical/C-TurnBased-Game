@@ -1,7 +1,2 @@
 ﻿  Game.cpp
-  GameManClass.cpp
-  WarriorClass.cpp
-  Main.cpp
-  Generating Code...
-C:\Users\6euleo45\Documents\GitHub\C-TurnBased-Game\TheLegendOfSemiColon TBRPG\TheLegendOfSemiColon TBRPG\Main.cpp(28): warning C4715: 'WinCheck': not all control paths return a value
-  TheLegendOfSemiColon TBRPG.vcxproj -> C:\Users\6euleo45\Documents\GitHub\C-TurnBased-Game\TheLegendOfSemiColon TBRPG\x64\Debug\TheLegendOfSemiColon TBRPG.exe
+  TheLegendOfSemiColon TBRPG.vcxproj -> C:\Users\6euleo45.UNI\Documents\GitHub\C-TurnBased-Game\TheLegendOfSemiColon TBRPG\x64\Debug\TheLegendOfSemiColon TBRPG.exe

@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameManClass.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="WarriorClass.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>

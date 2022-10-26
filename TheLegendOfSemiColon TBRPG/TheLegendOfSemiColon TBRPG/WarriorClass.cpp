@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Warrior.h"
 
-Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 50 }, health{100} {}
+Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 50 }, health{ 100 }, rechargeRate{4} {}
 
 //Class for player
 	void Warrior::coolSaying() {
@@ -37,6 +37,11 @@ Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 5
 
 		health += heals;
 		if (health > maxHealth) { health = maxHealth; }
+	}
+
+	//            ****Combat Actions****
+	void Warrior::attack() {
+
 	}
 
 

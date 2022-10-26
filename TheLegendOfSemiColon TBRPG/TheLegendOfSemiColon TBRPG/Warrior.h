@@ -8,6 +8,7 @@ private:
 
 	const int maxEnergy;
 	int energy;
+	int rechargeRate;
 
 	int accuracy;
 
@@ -25,5 +26,10 @@ public:
 
 	void takeDamage(int);
 	void healDamage(int);
+
+
+	void attack();
+	void heal();
+	void dodge();
 
 };
