@@ -11,6 +11,11 @@ private:
 	int rechargeRate;
 
 	int accuracy;
+	
+
+	bool spAtk;
+
+	bool healedThisTurn;
 
 
 	//           ----MovePoints----
@@ -21,15 +26,19 @@ public:
 	Warrior();
 	void coolSaying();
 
-	int getHealth();
-	int getEnergy();
+	int GetHealth();
+	int GetEnergy();
 
-	void takeDamage(int);
-	void healDamage(int);
+	void TakeDamage(int);
+	void HealDamage(int);
+	void AddAccuracy(int);
 
+	int Attack(bool);
+	int calcAccuracy(int);
+	
+	void Recharge(Warrior);
+	void Dodge(Warrior);
+	void Heal();
 
-	void attack();
-	void heal();
-	void dodge();
-
+	void ResetStats();
 };

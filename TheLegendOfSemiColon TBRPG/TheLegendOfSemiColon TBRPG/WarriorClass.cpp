@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Warrior.h"
 
-Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 50 }, health{ 100 }, rechargeRate{4} {}
+Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 50 }, health{ 100 }, rechargeRate{ 4 }, spAtk{ false }, healedThisTurn{ false } {}
 
 //Class for player
 	void Warrior::coolSaying() {
@@ -10,38 +10,142 @@ Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 5
 
 
 
-	//Read important variables (Health, Energy)
-	int Warrior::getHealth() {
+	//            **Read variables**
+	int Warrior::GetHealth() {
 
 		int hp = health;
 
 		return hp;
 	}
-	int Warrior::getEnergy() {
+	int Warrior::GetEnergy() {
 
 		int hp = energy;
 
 		return hp;
 	}
 
+
 	//            *****Combat Math*****
-	void Warrior::takeDamage(int dmg) {
+	void Warrior::TakeDamage(int dmg) {
 
 		health -= dmg;
 
-		if (health < 0)		{ health = 0; }
+		if (health < 0)		
+		{ 
+			health = 0;
+		}
 
 	}
 
-	void Warrior::healDamage(int heals) {
+	void Warrior::HealDamage(int heals) {
 
 		health += heals;
 		if (health > maxHealth) { health = maxHealth; }
 	}
 
-	//            ****Combat Actions****
-	void Warrior::attack() {
+	void Warrior::AddAccuracy(int acc) {
+		
+		accuracy += acc;
+	}
 
+
+
+	//            ****Combat Actions****
+
+
+	int Warrior::calcAccuracy(int hitChance) {
+
+		
+		/// If the random percentage is more than the accuracy then the players attack misses
+		
+
+		if (rand() % 100 + 0 <= hitChance) {   //The attack hits
+			return 0;
+		}
+
+		else {  //The attack is mitigated 
+			return 1;
+		}
+	
+	}
+
+
+	int Warrior::Attack(bool spAtk) {
+		
+		int atkDamage;
+
+		
+
+		if (!spAtk) {
+
+			energy -= 5;
+			atkDamage = rand() % 11 + 1;
+			atkDamage *= calcAccuracy(80);
+
+
+		}
+		else if (spAtk) {
+
+			energy -= 20;
+			atkDamage = rand() % 21 + 5;
+			atkDamage *= calcAccuracy(50);
+		}
+
+
+			return atkDamage;
+	}
+
+	void Warrior::Recharge(Warrior Foe) {
+		rechargeRate *= 4;
+
+		Foe.accuracy += 10;
+
+
+	}
+
+	void Warrior::Dodge(Warrior Foe) {   //reduces enemy's chance of hitting
+
+		Foe.accuracy -= 30;       
+		rechargeRate /= 2;
+
+	}
+
+	void Warrior::Heal() {
+
+		if (energy >= 10 && !healedThisTurn && health != maxHealth) {
+			
+			if (maxHealth - health < energy/2)
+			{
+				energy -= maxHealth - health;
+				health = maxHealth;
+			}
+			else {
+
+				health += energy / 2;
+				energy /= 2;
+				
+			}
+
+
+		}
+		else {
+			std::cout << "HEALING FAILED\n\n\n"<< std::endl;
+		}
+
+		healedThisTurn = true;
+		
+		
+	}
+
+	void Warrior::ResetStats() {
+		accuracy = 0;
+
+		energy += rechargeRate;
+
+		rechargeRate = 4;
+		healedThisTurn = false;
+
+		std::cout << " stats reset" << std::endl;
 	}
 
 

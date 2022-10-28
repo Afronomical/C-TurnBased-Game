@@ -16,7 +16,7 @@ public:
 	void PlayGame();
 	void PlayerTurn();
 	void EnemyTurn();
-	void EnemyAI();
+	int EnemyAI();
 	void Resolve();
 
 
