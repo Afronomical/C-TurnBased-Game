@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Warrior.h"
 
-Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 50 }, health{ 100 }, rechargeRate{ 4 }, spAtk{ false }, healedThisTurn{ false } {}
+Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 50 }, health{ 100 }, rechargeRate{ 4 }, spAtk{ false }, healedThisTurn{ false }, accumulatedDamageThisTurn{ 0 } {}
 
 //Class for player
 	void Warrior::coolSaying() {
@@ -23,6 +23,7 @@ Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 5
 
 		return hp;
 	}
+		
 
 
 	//            *****Combat Math*****
@@ -70,30 +71,35 @@ Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 5
 	}
 
 
-	int Warrior::Attack(bool spAtk) {
-		
-		int atkDamage;
+	void Warrior::CalcAttackDamage(bool specialAttacking) {
+		int atkDamageToDeal;
 
 		
 
-		if (!spAtk) {
+		if (!specialAttacking) {
 
 			energy -= 5;
-			atkDamage = rand() % 11 + 1;
-			atkDamage *= calcAccuracy(80);
-
+			atkDamageToDeal = rand() % 11 + 1;
+			//atkDamageToDeal *= calcAccuracy(80);
+			accumulatedDamageThisTurn = atkDamageToDeal;
 
 		}
-		else if (spAtk) {
+		else if (specialAttacking) {
 
 			energy -= 20;
-			atkDamage = rand() % 21 + 5;
-			atkDamage *= calcAccuracy(50);
+			atkDamageToDeal = rand() % 21 + 5;
+			atkDamageToDeal *= calcAccuracy(50);
+			accumulatedDamageThisTurn = atkDamageToDeal;
 		}
 
 
-			return atkDamage;
+			
 	}
+	int Warrior::DamageDealt() {
+
+		return accumulatedDamageThisTurn;
+	}
+
 
 	void Warrior::Recharge(Warrior Foe) {
 		rechargeRate *= 4;
@@ -141,6 +147,9 @@ Warrior::Warrior() : maxHealth{ 100 }, maxEnergy{ 50 }, accuracy{ 0 }, energy{ 5
 		accuracy = 0;
 
 		energy += rechargeRate;
+		if (energy < maxEnergy) {
+			energy = maxEnergy;
+		}
 
 		rechargeRate = 4;
 		healedThisTurn = false;

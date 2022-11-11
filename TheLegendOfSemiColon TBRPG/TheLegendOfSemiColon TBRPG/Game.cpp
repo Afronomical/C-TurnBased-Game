@@ -18,6 +18,61 @@ void Game::PlayGame() {
 
 }
 
+void Game::Turn(Warrior ThisObject, Warrior Opponent, int input) {
+	
+	enum actions
+	{
+		Attack = 1, SpAttack, Dodge, ReCharge, Heal
+	};
+
+	actions choice;
+
+	choice = (actions)input;
+
+	switch (choice)
+	{
+	case actions::Attack:
+
+		Player.CalcAttackDamage(false);
+
+		std::cout << "You attacked \n";
+
+		break;
+
+	case actions::SpAttack:
+
+		Player.CalcAttackDamage(true);
+		std::cout << "You used a special move \n";
+
+		break;
+
+	case actions::Dodge:
+
+		Player.Dodge(Enemy);
+		std::cout << "You prepared to dodge \n";
+
+		break;
+
+	case actions::ReCharge:
+
+
+		break;
+
+	case actions::Heal:
+
+		std::cout << "You healed \n";
+		Player.Heal();
+		PlayerTurn();
+
+		break;
+
+	}
+
+	return;
+}
+
+
+
 void Game::PlayerTurn()
 {
 	std::cout << "*****Player***** " << std::endl << "Health - " << Player.GetHealth() << std::endl << "Energy - " << Player.GetEnergy()  << "\n" <<std::endl;
@@ -41,7 +96,7 @@ void Game::PlayerTurn()
 	{
 	case actions::Attack: 
 
-		Player.Attack(false);
+		Player.CalcAttackDamage(false);
 		
 		std::cout << "You attacked \n";
 
@@ -49,7 +104,7 @@ void Game::PlayerTurn()
 
 	case actions::SpAttack:
 		
-		Player.Attack(true);
+		Player.CalcAttackDamage(true);
 		std::cout << "You used a special move \n";
 
 		break;
@@ -87,7 +142,7 @@ int Game::EnemyAI() {
 }
 
 void Game::EnemyTurn() {
-	std::cout << "EnemyTurn" << std::endl;
+	
 }
 
 void Game::Resolve() {
@@ -95,10 +150,10 @@ void Game::Resolve() {
 	
 
 	
-	Player.TakeDamage(20);
-	
+	Player.TakeDamage(Enemy.DamageDealt());
+	Enemy.TakeDamage(Player.DamageDealt());
 	Player.ResetStats();
 	Enemy.ResetStats();
 	
-	std::cout << "\n \n\n\n\n";
+	std::cout << "\n \n\n\n\n\n \n\n\n\n";
 }

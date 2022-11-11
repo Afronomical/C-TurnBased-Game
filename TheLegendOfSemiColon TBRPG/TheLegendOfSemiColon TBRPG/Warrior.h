@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 class Warrior {
 private:
 
@@ -6,12 +7,14 @@ private:
 	const int maxHealth;
 	int health;
 
+	const std::string Name;
+
 	const int maxEnergy;
 	int energy;
 	int rechargeRate;
 
 	int accuracy;
-	
+	int accumulatedDamageThisTurn;
 
 	bool spAtk;
 
@@ -25,6 +28,7 @@ private:
 public:
 	Warrior();
 	void coolSaying();
+	void SetObjectName();
 
 	int GetHealth();
 	int GetEnergy();
@@ -33,7 +37,8 @@ public:
 	void HealDamage(int);
 	void AddAccuracy(int);
 
-	int Attack(bool);
+	void CalcAttackDamage(bool);
+	int DamageDealt();
 	int calcAccuracy(int);
 	
 	void Recharge(Warrior);
@@ -41,4 +46,5 @@ public:
 	void Heal();
 
 	void ResetStats();
+	
 };

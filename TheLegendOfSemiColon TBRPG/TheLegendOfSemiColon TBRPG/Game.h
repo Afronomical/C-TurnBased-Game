@@ -14,6 +14,7 @@ public:
 
 	Game();
 	void PlayGame();
+	void Turn(Warrior, Warrior, int);
 	void PlayerTurn();
 	void EnemyTurn();
 	int EnemyAI();
